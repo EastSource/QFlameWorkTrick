@@ -4,7 +4,7 @@
 PhysicsManager:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  m_Gravity: {x: 0, y: -9.81, z: 0}
+  m_Gravity: {x: 0, y: -80, z: 0}
   m_DefaultMaterial: {fileID: 0}
   m_BounceThreshold: 2
   m_DefaultMaxDepenetrationVelocity: 10
@@ -18,7 +18,7 @@ PhysicsManager:
   m_ClothInterCollisionDistance: 0
   m_ClothInterCollisionStiffness: 0
   m_ContactsGeneration: 1
-  m_LayerCollisionMatrix: c8000010c8000010c8000010ffffffffc8020010c8000010ffffffffffffffffc8000010d84067b1c8000010c8000010c8000010c8000010c8029211c8000010c8029a11c842d791c8029211c8000900c840c790c8020010c8029291c840d791c842c798c8000010c8000010c8000011fffff7ffc8020010c8000010c802d211
+  m_LayerCollisionMatrix: c8000010c8000010c8000010ffffffffc8020010c8000010bfffff7fffffffffc8000010d84067b1c8000010c8000010c8000010c8000010c8029211c8000010c8029a11c842d791c8029211c8000900c840c790c8020010c8029291c840d791c842c798c8000010c8000010c8000011fffff7ffc8020010c80000108802d211
   m_AutoSimulation: 1
   m_AutoSyncTransforms: 1
   m_ReuseCollisionCallbacks: 0
