@@ -14,8 +14,8 @@ public class PlayerModel : AbstractModel
     public Vector3 StartPosition { get => startPosition; }
     public float MovementSpeed => movementSpeed;
     public float JumpPower { get => jumpPower; }
-    public bool HaveKey => haveKey;
-    
+    public bool HaveKey { get => haveKey; set => haveKey = value; }
+
     protected override void OnInit()
     {
         startPosition = new Vector3(-20f, -8f, 0f);

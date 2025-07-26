@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using QFramework;
 using UnityEngine;
@@ -8,7 +7,17 @@ public class PlayerDeadCommand : AbstractCommand
 {
     protected override void OnExecute()
     {
+        this.GetModel<PlayerModel>().HaveKey = false;
+        PlayerController.Instance.StartCoroutine(OnDead());
+    }
+
+    //After wait 1sec, InitStage and Respawn Player
+    private IEnumerator OnDead()
+    {
+        PlayerController.Instance.PosePlayerControle();
+        yield return new WaitForSeconds(1f);
         DOTween.KillAll();
+        PlayerController.Instance.RestartPlayerControle();
         this.SendEvent<OnPlayerDead>();
     }
 }

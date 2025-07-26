@@ -1,0 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using QFramework;
+using UnityEngine;
+
+public class PlayerGetGoalKeyCommand : AbstractCommand
+{
+    protected override void OnExecute()
+    {
+        this.GetModel<PlayerModel>().HaveKey = true;
+        this.SendEvent<OnPlayerGetGoalKey>();
+    }
+}

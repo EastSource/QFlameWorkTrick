@@ -12,7 +12,7 @@ public class CFallFloor : abstractTrap, IController
 
     private void Awake()
     {
-        fixedPosition = new Vector3(11.55f, -13f, 0.5f);
+        fixedPosition = this.transform.position;
         rb = GetComponent<Rigidbody>();
     }
 

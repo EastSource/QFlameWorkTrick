@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IController
 
     private bool canMove;
     private bool canJump;
-    private bool isJump;
+    [SerializeField]private bool isJump;
     private Rigidbody rb;
     private PlayerInput playerInput;
     private PlayerModel mPlayer;
@@ -57,13 +57,17 @@ public class PlayerController : MonoBehaviour, IController
 
     private void Spawn()
     {
+        rb.isKinematic = true;
         transform.position = mPlayer.StartPosition;
+        rb.isKinematic = false;
     }
 
     private void Jump()
     {
-        if (isJump && !canJump) return;
-        rb.AddForce(Vector3.up * mPlayer.JumpPower, ForceMode.Impulse);
+        if (!isJump && canJump)
+        {
+            rb.AddForce(Vector3.up * mPlayer.JumpPower, ForceMode.Impulse);
+        }
     }
 
     public void RestartPlayerControle()
