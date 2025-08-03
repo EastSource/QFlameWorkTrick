@@ -13,7 +13,7 @@ public class CMovingWall : abstractTrap, IController
         fixedPosition = this.transform.position;
         desticationPosition = stopPosition;
         this.RegisterEvent<OnPlayerGetGoalKey>(e => Move());
-        this.RegisterEvent<OnPlayerDead>(e => Restart());
+        this.RegisterEvent<OnReLoaded>(e => Restart());
     }
 
     public override void Move()

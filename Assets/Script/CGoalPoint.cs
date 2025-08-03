@@ -10,7 +10,7 @@ public class CGoalPoint : MonoBehaviour, IController
     private void Start()
     {
         this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => Show());
-        this.RegisterEvent<OnPlayerDead>(e => Hide());
+        this.RegisterEvent<OnReLoaded>(e => Hide());
         Hide();
     }
     
@@ -29,7 +29,7 @@ public class CGoalPoint : MonoBehaviour, IController
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Goal");
+            this.SendCommand<PlayerGoalCommand>();
         }
     }
 

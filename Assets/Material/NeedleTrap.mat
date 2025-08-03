@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: background
+  m_Name: NeedleTrap
   m_Shader: {fileID: 4800000, guid: 34becb3e6c0e9b74f930bd66b06f61b6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -68,18 +68,15 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.01
     - _Parallax: 0.02
-    - _ReflectionLevel: 10
-    - _ReflectionLimitter: 0
+    - _ReflectionLevel: 3.75
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UseReflectionLimitter: 1.33
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.29559743, b: 0.00579601, a: 1}
+    - _Color: {r: 0.80547357, g: 0.8113208, b: 0.72202444, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutLineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.02745098, g: 0.015686275, b: 0.05490196, a: 1}

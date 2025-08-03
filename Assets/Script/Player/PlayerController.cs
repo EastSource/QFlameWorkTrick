@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, IController
         playerInput.Player.Enable();
         
         //イベント登録
-        this.RegisterEvent<OnPlayerDead>(e =>
+        this.RegisterEvent<OnReLoaded>(e =>
         {
             Spawn();
         });
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IController
 
     private void Spawn()
     {
+        mPlayer.HaveKey = false;
         rb.isKinematic = true;
         transform.position = mPlayer.StartPosition;
         rb.isKinematic = false;

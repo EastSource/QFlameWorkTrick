@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class CFakeGoalPoint : abstractTrap, IController
 {
+    [SerializeField] private float MovingdurationTime = 2.0f;
     private void Start()
     {
         fixedPosition = this.transform.position;
         desticationPosition = transform.position + new Vector3(45f, 0, 0);
-        this.RegisterEvent<OnPlayerDead>(e => Restart());
+        this.RegisterEvent<OnReLoaded>(e => Restart());
     }
     
     public override void Move()
     {
         this.SendCommand<TurnOnFakeGoalPointCommand>();
-        this.transform.DOMove(desticationPosition, 2.7f).SetEase(Ease.OutSine);
+        this.transform.DOMove(desticationPosition, MovingdurationTime).SetEase(Ease.OutSine);
     }
 
     public override void Restart()

@@ -9,7 +9,7 @@ public class GoalKeyController : MonoBehaviour, IController
     private void Start()
     {
         this.RegisterEvent<OnPlayerGetGoalKey>(e => Hide());
-        this.RegisterEvent<OnPlayerDead>(e => Show());
+        this.RegisterEvent<OnReLoaded>(e => Show());
     }
 
     void OnTriggerEnter(Collider other)

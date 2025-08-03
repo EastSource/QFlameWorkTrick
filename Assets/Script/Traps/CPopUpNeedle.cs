@@ -17,7 +17,7 @@ public class CPopUpNeedle : abstractTrap, IController
 
     private void Start()
     {
-        this.RegisterEvent<OnPlayerDead>(e =>
+        this.RegisterEvent<OnReLoaded>(e =>
         {
             Restart();
         });
