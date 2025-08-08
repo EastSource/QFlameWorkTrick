@@ -8,13 +8,17 @@ using UnityEngine;
 public class CMovingWall : abstractTrap, IController
 {
     [SerializeField] private Vector3 stopPosition;
+    //移動先に移動するまでにかかる時間
     [SerializeField] private float moveSpeed = 5f;
     private void Start()
     {
+        //変数初期化
         fixedPosition = this.transform.position;
         desticationPosition = stopPosition;
-        this.RegisterEvent<OnPlayerGetGoalKey>(e => Move());
-        this.RegisterEvent<OnReLoaded>(e => Restart());
+        
+        //イベント登録
+        this.RegisterEvent<OnPlayerGetGoalKey>(e => Move()).UnRegisterWhenCurrentSceneUnloaded();
+        this.RegisterEvent<OnReLoaded>(e => Restart()).UnRegisterWhenCurrentSceneUnloaded();
     }
 
     public override void Move()

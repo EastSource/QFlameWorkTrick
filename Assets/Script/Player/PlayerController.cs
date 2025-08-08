@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IController
 {
+    //シングルトンパターン
     public static PlayerController Instance {set; get;}
 
     private bool canMove;
@@ -16,7 +17,8 @@ public class PlayerController : MonoBehaviour, IController
     private PlayerModel mPlayer;
 
     [SerializeField]private bool isJump;
-    [SerializeField] private bool initHasKey = false;
+    //ステージにゴールキーがある場合True、無い場合False
+    [SerializeField]private bool initHasKey = false;
     
     private void Awake()
     {
@@ -38,10 +40,17 @@ public class PlayerController : MonoBehaviour, IController
         this.RegisterEvent<OnReLoaded>(e =>
         {
             Spawn();
-        });
+        }).UnRegisterWhenCurrentSceneUnloaded();
         playerInput.Player.Jump.performed += ctx => Jump();
         //初期位置にスポーンする
         Spawn();
+    }
+    
+    //イベントをUnRegister
+    private void OnDestroy()
+    {
+        playerInput.Player.Jump.performed -= ctx => Jump();
+        playerInput.Player.Disable();
     }
     
     private void Update()
@@ -58,6 +67,7 @@ public class PlayerController : MonoBehaviour, IController
         transform.position += new Vector3(inputVector * mPlayer.MovementSpeed, 0, 0) * Time.deltaTime;
     }
 
+    //スポーン、リスポーン両方
     private void Spawn()
     {
         mPlayer.HaveKey = initHasKey;
@@ -74,6 +84,8 @@ public class PlayerController : MonoBehaviour, IController
         }
     }
 
+    //PlayerDeadCommandクラスで使われている
+    //一時的にプレイヤーが操作‘を行えないようにするためのコマンド
     public void RestartPlayerControle()
     {
         canMove = true;
@@ -86,10 +98,6 @@ public class PlayerController : MonoBehaviour, IController
         canJump = false;
     }
 
-    public IArchitecture GetArchitecture()
-    {
-        return TrapGameApp.Interface;
-    }
     
     //floorに接していればisJump = false,　接していなければtrue
     void OnCollisionEnter2D(Collision2D collision)
@@ -106,5 +114,9 @@ public class PlayerController : MonoBehaviour, IController
         {
             isJump = true;
         }
+    }
+    public IArchitecture GetArchitecture()
+    {
+        return TrapGameApp.Interface;
     }
 }

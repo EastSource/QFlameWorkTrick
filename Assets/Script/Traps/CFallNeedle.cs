@@ -14,12 +14,17 @@ public class CFallNeedle : abstractTrap, IController
 
     private void Start()
     {
+        //コンポーネントを取得
         rb = GetComponent<Rigidbody2D>();
+        
+        //落下を禁止
+        rb.isKinematic = true;
+        
+        //イベント登録
         this.RegisterEvent<OnReLoaded>(e =>
         {
             Restart();
-        });
-        rb.isKinematic = true;
+        }).UnRegisterWhenCurrentSceneUnloaded();
     }
     public override void Move()
     {
@@ -34,6 +39,7 @@ public class CFallNeedle : abstractTrap, IController
         this.transform.position = fixedPosition;   
     }
 
+    //衝突したときプレイヤーの死亡処理
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))

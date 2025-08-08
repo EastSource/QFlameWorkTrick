@@ -7,22 +7,26 @@ using UnityEngine;
 public class CFallFloor : abstractTrap, IController
 {
     private Rigidbody2D rb;
-    
-    //このオブジェクトには必要がない
 
     private void Awake()
     {
+        //変数
         fixedPosition = this.transform.position;
+        
+        //コンポーネントを取得
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        //落下を禁止
         rb.isKinematic = true;
+        
+        //イベント登録
         this.RegisterEvent<OnReLoaded>(e =>
         {
             Restart();
-        });
+        }).UnRegisterWhenCurrentSceneUnloaded();
     }
     
     public override void Move()
@@ -38,12 +42,8 @@ public class CFallFloor : abstractTrap, IController
         rb.isKinematic = true;
         this.transform.position = fixedPosition;
     }
-
-    public IArchitecture GetArchitecture()
-    {
-        return TrapGameApp.Interface;
-    }
-
+    
+    //衝突したとき落下する
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -51,4 +51,11 @@ public class CFallFloor : abstractTrap, IController
             Move();
         }
     }
+    
+    public IArchitecture GetArchitecture()
+    {
+        return TrapGameApp.Interface;
+    }
+
+    
 }

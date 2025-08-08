@@ -11,13 +11,14 @@ public class UIController : MonoBehaviour, IController
 
     private void Start()
     {
-        this.RegisterEvent<OnPlayerGetGoalKey>(e => HideKey());
-        this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => HideGoal());;
+        //イベント登録
+        this.RegisterEvent<OnPlayerGetGoalKey>(e => HideKey()).UnRegisterWhenCurrentSceneUnloaded();
+        this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => HideGoal()).UnRegisterWhenCurrentSceneUnloaded();;
         this.RegisterEvent<OnReLoaded>(e =>
         {
             ShowGoal();
             ShowKey();
-        });
+        }).UnRegisterWhenCurrentSceneUnloaded();
     }
     
     //view

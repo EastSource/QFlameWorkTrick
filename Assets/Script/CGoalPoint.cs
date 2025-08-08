@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using QFramework;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CGoalPoint : MonoBehaviour, IController
 {
-    [SerializeField] private MeshRenderer meshRenderer;
+    //ゴールした時の遷移先
+    [SerializeField] private SceneAsset sceneToLoad;
     private void Start()
     {
-        this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => Show());
+        //イベントの登録
+        this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => Show()).UnRegisterWhenCurrentSceneUnloaded();
         this.RegisterEvent<OnReLoaded>(e =>
         {
             if (this.GetModel<PlayerModel>().HaveKey)
@@ -18,7 +22,7 @@ public class CGoalPoint : MonoBehaviour, IController
             {
                 Hide();
             }
-        });
+        }).UnRegisterWhenCurrentSceneUnloaded();
     }
     
     //view
@@ -32,11 +36,13 @@ public class CGoalPoint : MonoBehaviour, IController
         this.gameObject.SetActive(false);   
     }
 
+    //ゴールした時の処理`
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             this.SendCommand<PlayerGoalCommand>();
+            SceneManager.LoadScene(sceneToLoad.name);
         }
     }
 

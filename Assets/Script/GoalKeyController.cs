@@ -10,10 +10,12 @@ public class GoalKeyController : MonoBehaviour, IController
     [SerializeField]private Text text;
     private void Start()
     {
-        this.RegisterEvent<OnPlayerGetGoalKey>(e => Hide());
-        this.RegisterEvent<OnReLoaded>(e => Show());
+        //イベント登録
+        this.RegisterEvent<OnPlayerGetGoalKey>(e => Hide()).UnRegisterWhenCurrentSceneUnloaded();
+        this.RegisterEvent<OnReLoaded>(e => Show()).UnRegisterWhenCurrentSceneUnloaded();
     }
 
+    //衝突したときPlayerGetGoalKeyCommandを送るのみ
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))

@@ -2795,6 +2795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 1381551517}
+  sceneToLoad: {fileID: 102900000, guid: 2a32b02e860568349814e528479fe74e, type: 3}
 --- !u!23 &1381551517
 MeshRenderer:
   m_ObjectHideFlags: 0

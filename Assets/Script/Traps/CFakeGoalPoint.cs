@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class CFakeGoalPoint : abstractTrap, IController
 {
+    //移動先に移動するまでにかかる時間
     [SerializeField] private float MovingdurationTime = 2.0f;
     private void Start()
     {
         fixedPosition = this.transform.position;
         desticationPosition = transform.position + new Vector3(45f, 0, 0);
-        this.RegisterEvent<OnReLoaded>(e => Restart());
+        this.RegisterEvent<OnReLoaded>(e => Restart()).UnRegisterWhenCurrentSceneUnloaded();
     }
     
     public override void Move()
@@ -25,7 +26,8 @@ public class CFakeGoalPoint : abstractTrap, IController
         Show();
         this.transform.position = fixedPosition;   
     }
-
+    
+    //プレイヤーと衝突したとき死亡処理
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
