@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour, IController
     
     private void Start()
     {
+        //各コンポーネントの取得
         playerInput = new PlayerInput();
         mPlayer = this.GetModel<PlayerModel>();
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour, IController
             Movement();
         }
     }
-
+    
     private void Movement()
     {
         float inputVector = playerInput.Player.Moving.ReadValue<float>();
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour, IController
         return TrapGameApp.Interface;
     }
     
+    //floorに接していればisJump = false,　接していなければtrue
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("floor"))
