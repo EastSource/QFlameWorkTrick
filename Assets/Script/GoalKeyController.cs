@@ -27,13 +27,11 @@ public class GoalKeyController : MonoBehaviour, IController
     public void Show()
     {
         gameObject.SetActive(true); 
-        text.gameObject.SetActive(true);
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);   
-        text.gameObject.SetActive(false);
     }
     
     public IArchitecture GetArchitecture()

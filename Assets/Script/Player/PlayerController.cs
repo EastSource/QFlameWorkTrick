@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour, IController
 
     private bool canMove;
     private bool canJump;
-    [SerializeField]private bool isJump;
     private Rigidbody2D rb;
     private PlayerInput playerInput;
     private PlayerModel mPlayer;
+
+    [SerializeField]private bool isJump;
+    [SerializeField] private bool initHasKey = false;
     
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour, IController
         mPlayer = this.GetModel<PlayerModel>();
         rb = GetComponent<Rigidbody2D>();
         playerInput.Player.Enable();
+        mPlayer.HaveKey = initHasKey;
         
         //イベント登録
         this.RegisterEvent<OnReLoaded>(e =>
@@ -37,7 +40,6 @@ public class PlayerController : MonoBehaviour, IController
             Spawn();
         });
         playerInput.Player.Jump.performed += ctx => Jump();
-        
         //初期位置にスポーンする
         Spawn();
     }
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour, IController
 
     private void Spawn()
     {
-        mPlayer.HaveKey = false;
+        mPlayer.HaveKey = initHasKey;
         rb.isKinematic = true;
         transform.position = mPlayer.StartPosition;
         rb.isKinematic = false;
