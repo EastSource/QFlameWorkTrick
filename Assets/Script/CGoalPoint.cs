@@ -6,12 +6,19 @@ using UnityEngine;
 public class CGoalPoint : MonoBehaviour, IController
 {
     [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private MeshCollider meshCollider;
     private void Start()
     {
         this.RegisterEvent<OnTurnOnFakeGoalPoint>(e => Show());
-        this.RegisterEvent<OnReLoaded>(e => Hide());
-        Hide();
+        this.RegisterEvent<OnReLoaded>(e =>
+        {
+            if (this.GetModel<PlayerModel>().HaveKey)
+            {
+                Show();
+            }else
+            {
+                Hide();
+            }
+        });
     }
     
     //view

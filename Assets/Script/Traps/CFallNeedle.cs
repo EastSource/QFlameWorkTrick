@@ -4,51 +4,46 @@ using System.Collections.Generic;
 using QFramework;
 using UnityEngine;
 
-public class CFallFloor : abstractTrap, IController
+public class CFallNeedle : abstractTrap, IController
 {
-    private Rigidbody2D rb;
-    
-    //このオブジェクトには必要がない
-
+    Rigidbody2D rb;
     private void Awake()
     {
         fixedPosition = this.transform.position;
-        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        rb.isKinematic = true;
+        rb = GetComponent<Rigidbody2D>();
         this.RegisterEvent<OnReLoaded>(e =>
         {
             Restart();
         });
+        rb.isKinematic = true;
     }
-    
     public override void Move()
     {
         rb.isKinematic = false;
-        Debug.Log(rb.isKinematic);
-        
+        rb.AddForce(Vector2.down * 70, ForceMode2D.Impulse);
     }
 
     public override void Restart()
     {
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
-        this.transform.position = fixedPosition;
+        this.transform.position = fixedPosition;   
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            this.SendCommand<PlayerDeadCommand>();
+        }
     }
 
     public IArchitecture GetArchitecture()
     {
-        return TrapGameApp.Interface;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Move();
-        }
+        return TrapGameApp.Interface;   
     }
 }
