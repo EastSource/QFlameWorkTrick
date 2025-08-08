@@ -26,7 +26,7 @@ public class CFakeGoalPoint : abstractTrap, IController
         this.transform.position = fixedPosition;   
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

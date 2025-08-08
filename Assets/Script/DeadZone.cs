@@ -5,7 +5,7 @@ using QFramework;
 
 public class DeadZone : MonoBehaviour, IController
 {
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

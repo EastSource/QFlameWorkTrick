@@ -33,7 +33,7 @@ public class CPopUpNeedle : abstractTrap, IController
         this.transform.position = fixedPosition;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

@@ -6,7 +6,7 @@ public class TrapTrigger : MonoBehaviour
 {
     [SerializeField]private abstractTrap trap;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

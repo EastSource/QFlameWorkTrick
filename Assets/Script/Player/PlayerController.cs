@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IController
     private bool canMove;
     private bool canJump;
     [SerializeField]private bool isJump;
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private PlayerInput playerInput;
     private PlayerModel mPlayer;
     
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour, IController
     {
         playerInput = new PlayerInput();
         mPlayer = this.GetModel<PlayerModel>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         playerInput.Player.Enable();
         
         //イベント登録
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour, IController
     {
         if (!isJump && canJump)
         {
-            rb.AddForce(Vector3.up * mPlayer.JumpPower, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * mPlayer.JumpPower, ForceMode2D.Impulse);
         }
     }
 
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour, IController
         return TrapGameApp.Interface;
     }
     
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("floor"))
         {
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, IController
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("floor"))
         {
