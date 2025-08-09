@@ -2794,7 +2794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500f1d1ee89344d419c5ba7263b60eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 1381551517}
   sceneToLoad: {fileID: 102900000, guid: 2a32b02e860568349814e528479fe74e, type: 3}
 --- !u!23 &1381551517
 MeshRenderer:
