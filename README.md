@@ -1,4 +1,4 @@
-##QFrameWorkというUnityのフレームワークを使用しMVPという設計思想を学ぶために作成したUnityのプロジェクト
+## QFrameWorkというUnityのフレームワークを使用しMVPという設計思想を学ぶために作成したUnityのプロジェクト
 
 Asset/Sceneに三種類ステージがあるのでぜひクローンして遊んでみてください
 
